@@ -1,0 +1,29 @@
+opam-version: "1.2"
+version: "1.0"
+maintainer: "Rizo Isrof <rizo@odis.io>"
+authors: [ "Rizo Isrof <rizo@odis.io>" ]
+license: "MIT"
+homepage: "http://github.com/rizo/ppx_format"
+dev-repo: "https://github.com/rizo/ppx_format.git"
+bug-reports: "https://github.com/rizo/ppx_format/issues"
+build: [
+  ["oasis" "setup"]
+  ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
+  ["ocaml" "setup.ml" "-build"]
+]
+install: ["ocaml" "setup.ml" "-install"]
+remove: [
+  ["ocamlfind" "remove" "ppx_format"]
+]
+build-test: [
+  ["oasis" "setup"]
+  ["ocaml" "setup.ml" "-configure" "--enable-tests"]
+  ["ocaml" "setup.ml" "-build"]
+  ["ocaml" "setup.ml" "-test"]
+]
+depends: [
+  "base-unix"
+  "oasis" {build & >= "0.4"}
+  "ocamlfind" {build}
+]
+available: [ ocaml-version = "4.03.0" ]
