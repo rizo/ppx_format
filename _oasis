@@ -1,0 +1,25 @@
+OASISFormat:  0.4
+Name:         ppx_format
+Version:      1.0
+Synopsis:     A -ppx extension that features a syntax for string formatting inspired by Python.
+Authors:      Rizo Isrof <rizo@odis.io>
+License:      MIT
+Plugins:      META (0.4), DevFiles (0.4)
+BuildTools:   ocamlbuild
+OCamlVersion: >= 4.02
+FilesAB:      lib/META.ab
+
+PreInstallCommand:   $ocamlfind install ppx_format lib/META
+PreUninstallCommand: $ocamlfind remove ppx_format
+
+Executable ppx_format
+  Path:             lib
+  BuildDepends:     compiler-libs.common, ppx_tools
+  MainIs:           ppx_format.ml
+  CompiledObject:   best
+
+Test test_ppx_protobuf
+  Command:          ocamlbuild -I lib -package oUnit  \
+                               -cflags '-ppx $ppx_format' \
+                               lib_test/test_ppx_format.byte --
+  TestTools:        ppx_format
