@@ -23,6 +23,7 @@ build-test: [
 ]
 depends: [
   "base-unix"
+  "ppx_tools"
   "oasis" {build & >= "0.4"}
   "ocamlfind" {build}
 ]
